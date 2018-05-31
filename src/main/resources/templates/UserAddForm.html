@@ -1,0 +1,29 @@
+
+<!--header-->
+<span th:replace="../static/base/DocHeader.html :: docheader" xmlns:th="http://www.w3.org/1999/xhtml"></span>
+<!--nawigacja-->
+<div th:replace="../static/base/Nav.html :: nav" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+<!--beginning-->
+<span th:replace="../static/base/Beggining.html :: beggining" xmlns:th="http://www.w3.org/1999/xhtml"></span>
+
+<h1>Create your account</h1>
+
+
+
+<form th:action="@{/user/add/form}" th:object="${user}" method="post">
+        <p th:class="addUserFormError" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
+    <p>First name: <input type="text" th:field="*{firstName}" /></p>
+        <p th:class="addUserFormError" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">
+    <p>Last name: <input type="text" th:field="*{lastName}" /></p>
+        <p th:class="addUserFormError" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">
+    <p>Login: <input type="text" th:field="*{username}" /></p>
+        <p th:class="addUserFormError" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+    <p>Password: <input type="password" th:field="*{password}" /></p>
+
+    <p><button type="submit" value="Submit" class="btn btn-info" >Register</button></p>
+</form>
+
+
+
+<span th:replace="../static/base/Footer.html :: footer" xmlns:th="http://www.w3.org/1999/xhtml"></span>
+</html>

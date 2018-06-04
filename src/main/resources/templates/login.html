@@ -23,7 +23,7 @@
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Login</div>
       <div class="card-body">
-
+        <p style="text-align: center;color: red;font-weight: bold;font-style: italic" th:if="${loginError}" class="error">Wrong username or password!</p>
         <form th:action="@{/login}" method="post">
           <div class="form-group">
             <label for="username">Username</label>

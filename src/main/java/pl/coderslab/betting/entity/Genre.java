@@ -3,14 +3,14 @@ package pl.coderslab.betting.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "games")
+@Table(name = "genres")
 @Data
-public class Game {
+public class Genre {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDateTime dateAndTime;
+    private String name;
 }

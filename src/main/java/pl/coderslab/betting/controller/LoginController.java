@@ -18,7 +18,7 @@ public class LoginController {
     @RequestMapping("/LoginError")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
-        return "login.html";
+        return "login";
     }
 
 

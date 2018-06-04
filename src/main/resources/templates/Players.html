@@ -1,0 +1,65 @@
+
+
+
+<!--header-->
+<span th:replace="../static/base/DocHeader.html :: docheader" xmlns:th="http://www.w3.org/1999/xhtml"></span>
+<!--nawigacja-->
+<div th:replace="../static/base/Nav.html :: nav" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+<!--beginning-->
+<span th:replace="../static/base/Beggining.html :: beggining" xmlns:th="http://www.w3.org/1999/xhtml"></span>
+
+
+
+<!--CONTENT-->
+
+<!-- Example DataTables Card-->
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fa fa-table"></i> Players: </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Nickname</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Win ratio</th>
+                    <th>Player teams</th>
+                </tr>
+                </thead>
+
+                <tfoot>
+                <tr>
+                    <th>Nickname</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Win ratio</th>
+                    <th>Player teams</th>
+                </tr>
+                </tfoot>
+                <tbody>
+                <tr th:each="player : ${players}" >
+                    <td th:text="${player.nickname}">Nickname</td>
+                    <td th:text="${player.firstName}">First name</td>
+                    <td th:text="${player.lastName}">Last name</td>
+                    <td th:text="${player.winRatio}">Win ratio</td>
+                    <td>
+                        <p th:each="team : ${player.playerTeams}" th:text="${team.name}">NOTHING</p>
+
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--CONTENT-->
+
+
+
+
+<span th:replace="../static/base/Footer.html :: footer" xmlns:th="http://www.w3.org/1999/xhtml"></span>
+</html>

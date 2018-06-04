@@ -3,20 +3,18 @@ package pl.coderslab.betting.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "teams")
+@Table(name = "video_games")
 @Data
-public class Team {
+public class VideoGame {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @OneToOne
-    private VideoGame videoGame;
-    private double winRatio;
-    @ManyToMany(cascade = {CascadeType.MERGE})
-    private List<Player> playerList;
-
+    private Genre genre;
+    private int roundDuration;
+    private Long numberOfRounds;
+    private Long maxAmountOfPlayersInTeam;
 }

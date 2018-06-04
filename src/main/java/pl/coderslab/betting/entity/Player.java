@@ -6,17 +6,17 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "teams")
+@Table(name = "players")
 @Data
-public class Team {
+public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    @OneToOne
-    private VideoGame videoGame;
+    @Column(unique = true)
+    private String nickname;
+    private String firstName;
+    private String lastName;
     private double winRatio;
-    @ManyToMany(cascade = {CascadeType.MERGE})
-    private List<Player> playerList;
-
+    @ManyToMany(mappedBy = "playerList")
+    private List<Team> playerTeams;
 }

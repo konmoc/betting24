@@ -6,9 +6,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import pl.coderslab.betting.entity.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class StartAppService {
@@ -23,6 +21,8 @@ public class StartAppService {
     VideoGameService videoGameService;
     @Autowired
     TeamService teamService;
+    @Autowired
+    UserService userService;
 
     Faker faker = new Faker();
 
@@ -92,7 +92,7 @@ public class StartAppService {
         VideoGame starCraft = new VideoGame();
         starCraft.setGenre(genreService.findGenreByName("RTS"));
         starCraft.setName("StarCraft 3");
-        starCraft.setRoundDuration(60);
+        starCraft.setRoundDuration(50);
         starCraft.setNumberOfRounds(new Long(1));
         starCraft.setMaxAmountOfPlayersInTeam(new Long(4));
         videoGameService.saveVideoGame(starCraft);
@@ -119,7 +119,7 @@ public class StartAppService {
         VideoGame LOL = new VideoGame();
         LOL.setGenre(genreService.findGenreByName("MOBA"));
         LOL.setName("League of Legends");
-        LOL.setRoundDuration(60);
+        LOL.setRoundDuration(70);
         LOL.setNumberOfRounds(new Long(1));
         LOL.setMaxAmountOfPlayersInTeam(new Long(5));
         videoGameService.saveVideoGame(LOL);
@@ -168,6 +168,21 @@ public class StartAppService {
             teamService.saveTeam(team);
 
         }
+
+            //we create 5 users
+            for(int i=0;i<100;i++){
+                User user = new User();
+                user.setUsername("userNo"+i);
+                user.setFirstName(faker.name().firstName());
+                user.setLastName(faker.name().lastName());
+                user.setPassword("user");
+                Set<Role> roles = new HashSet<>();
+                roles.add(roleService.findRoleById(1L));
+                user.setRoles(roles);
+                user.setMoney(1000.0);
+                userService.saveUser(user);
+
+            }
     }else{
             System.out.println("STARTING DATA ALREADY INITIALIZED");
         }

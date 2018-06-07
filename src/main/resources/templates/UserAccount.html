@@ -1,0 +1,99 @@
+
+
+
+<!--header-->
+<span th:replace="../static/base/DocHeader.html :: docheader" xmlns:th="http://www.w3.org/1999/xhtml"></span>
+<!--nawigacja-->
+<div th:replace="../static/base/Nav.html :: nav" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+<!--beginning-->
+<span th:replace="../static/base/Beggining.html :: beggining" xmlns:th="http://www.w3.org/1999/xhtml"></span>
+
+
+<h1  class="account" th:text="'ACCOUNT OF USER - ' + ${user.username}"></h1>
+
+<table class="table table-bordered" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>System Id</th>
+            <th>Username</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Money</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="account" th:text="${user.id}">id</td>
+            <td class="account" th:text="${user.username}">username</td>
+            <td class="account" th:text="${user.firstName}">firstname</td>
+            <td class="account" th:text="${user.lastName}">lastname</td>
+            <td class="account" th:text="${user.money} + ' $'">money</td>
+        </tr>
+    </tbody>
+</table>
+
+<h1  class="account">USER 1v1 BETS</h1>
+
+<table class="table table-bordered" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Bet ID</th>
+            <th>Game:</th>
+            <th>Placed bet on:</th>
+            <th>Bet value</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>Bet ID</th>
+            <th>Game:</th>
+            <th>Placed bet on:</th>
+            <th>Bet value</th>
+        </tr>
+    </tfoot>
+    <tbody>
+        <tr th:each="bet : ${playerBets}" >
+            <td th:text="${bet.id}"></td>
+            <td th:text="${bet.game.playersInGame.get(0).nickname}  + ' vs. ' + ${bet.game.playersInGame.get(1).nickname} + '(GAME ID = '+${bet.game.id} + ')' "></td>
+            <td th:text="${bet.playerWhoWeBetFor.nickname}"></td>
+            <td th:text="${bet.money} + '$'"></td>
+        </tr>
+    </tbody>
+</table>
+
+<h1  class="account">USER TEAM BETS</h1>
+
+<table class="table table-bordered" width="100%" cellspacing="0">
+    <thead>
+    <tr>
+        <th>Bet ID</th>
+        <th>Game:</th>
+        <th>Placed bet on:</th>
+        <th>Bet value</th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <th>Bet ID</th>
+        <th>Game:</th>
+        <th>Placed bet on:</th>
+        <th>Bet value</th>
+    </tr>
+    </tfoot>
+    <tbody>
+    <tr th:each="bet : ${teamBets}" >
+        <td th:text="${bet.id}"></td>
+        <td th:text="${bet.game.teamsInGame.get(0).name}  + ' vs. ' + ${bet.game.teamsInGame.get(1).name} + '(GAME ID = '+${bet.game.id} + ')' "></td>
+        <td th:text="${bet.teamWhoWeBetFor.nickname}"></td>
+        <td th:text="${bet.money} + '$'"></td>
+    </tr>
+    </tbody>
+</table>
+
+<!--CONTENT-->
+
+
+
+
+<span th:replace="../static/base/Footer.html :: footer" xmlns:th="http://www.w3.org/1999/xhtml"></span>
+</html>

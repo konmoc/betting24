@@ -1,0 +1,110 @@
+
+
+
+<!--header-->
+<span th:replace="../static/base/DocHeader.html :: docheader" xmlns:th="http://www.w3.org/1999/xhtml"></span>
+<!--nawigacja-->
+<div th:replace="../static/base/Nav.html :: nav" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+<!--beginning-->
+<span th:replace="../static/base/Beggining.html :: beggining" xmlns:th="http://www.w3.org/1999/xhtml"></span>
+
+
+
+<!--CONTENT-->
+
+<!-- Example DataTables Card-->
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fa fa-table"></i> Teams: </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>Team 1</th>
+                    <th>ODD</th>
+                    <th sec:authorize="isAuthenticated()">BET</th>
+                    <th style="text-align: center">The game starts in</th>
+                    <th>Team 2</th>
+                    <th>ODD</th>
+                    <th sec:authorize="isAuthenticated()">BET</th>
+                </tr>
+                </thead>
+
+                <tfoot>
+                <tr>
+                    <th>Team 1</th>
+                    <th>ODD</th>
+                    <th sec:authorize="isAuthenticated()">BET</th>
+                    <th style="text-align: center">The game starts in</th>
+                    <th>Team 2</th>
+                    <th>ODD</th>
+                    <th sec:authorize="isAuthenticated()">BET</th>
+                </tr>
+                </tfoot>
+                <tbody>
+                <tr th:each="game : ${gamesTeam}" >
+                    <td th:text="${ game.teamsInGame.get(0).name}">PLAYER 1</td>
+                    <td th:text="${game.odd1}">PLAYER 2 WIN RATIO</td>
+                    <td sec:authorize="isAuthenticated()"><a style="color: #fd7e14; font-weight: bolder; font-style: italic" th:href="@{'teambet/'+${game.id}+'/'+${game.teamsInGame.get(0).id}}">PLACE!</a></td>
+                    <td style="text-align: center;color: red; font-weight: bolder" th:text="${#temporals.format(game.dateAndTime, 'yyyy-MM-dd HH:mm')}" class="counter"> PLAYER 1 WIN RATIO</td>
+                    <td th:text="${ game.teamsInGame.get(1).name}">PLAYER 2</td>
+                    <td th:text="${game.odd2}">PLAYER 2 WIN RATIO</td>
+                    <td sec:authorize="isAuthenticated()"><a style="color: #fd7e14; font-weight: bolder; font-style: italic" th:href="@{'teambet/'+${game.id}+'/'+${game.teamsInGame.get(1).id}}">PLACE!</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--CONTENT-->
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log("TEST");
+        let counters = document.querySelectorAll('td.counter');
+
+        counters.forEach( elem => {
+            // console.log(elem.innerText);
+            countDown(elem);
+    });
+
+        // Set the date we're counting down to
+        function countDown(domElement) {
+            let textTime = domElement.innerText;
+            var countDownDate = new Date(textTime).getTime();
+            console.log(countDownDate);
+            // Update the count down every 1 second
+            var x = setInterval(function () {
+
+                // Get todays date and time
+                var now = new Date().getTime();
+
+                // Find the distance between now an the count down date
+                var distance = countDownDate - now;
+
+                // Time calculations for days, hours, minutes and seconds
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Display the result in the element with id="demo"
+                domElement.innerHTML = days + "d " + hours + "h "
+                    + minutes + "m " + seconds + "s ";
+
+                // If the count down is finished, write some text
+                if (distance < 0) {
+                    clearInterval(x);
+                    domElement.innerHTML = "Started";
+                }
+            }, 1000);
+        }
+    });
+</script>
+
+
+<span th:replace="../static/base/Footer.html :: footer" xmlns:th="http://www.w3.org/1999/xhtml"></span>
+</html>

@@ -1,11 +1,29 @@
 package pl.coderslab.betting.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.List;
 import java.util.Set;
+
+/**
+ * This entity describes user who uses our application.
+ * He/She is described by:
+ *  -username(String username)
+ *  -first name(String firstName)
+ *  -last name(String lastName)
+ *  -encoded password(String password)
+ *  -money on his account(Double money)
+ *  -enabled status(int enabled).
+ * EACH USER:
+ *  -can have many bets(List<Bet> bets)
+ *  -can have many sent messages(List<Message> messagesSent)
+ *  -can have many received messages(List<Message> messagesReceived
+ *  -can have many roles(Set<Role> roles)
+ */
 
 @Entity
 @Table(name = "users")
@@ -31,13 +49,15 @@ public class  User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-//    @OneToMany
-//    private List<Bet> bets;
+    @OneToMany(mappedBy = "user")
+    private List<Bet> bets;
 
-    @OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Message> messagesSent;
 
-    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Message> messagesReceived;
 
 

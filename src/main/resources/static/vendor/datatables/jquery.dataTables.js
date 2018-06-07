@@ -154,7 +154,7 @@
 		 *  @param {string} [oOpts.page=all] Limit the selection to the currently displayed page
 		 *    ("current") or not ("all"). If 'current' is given, then order is assumed to be
 		 *    'current' and filter is 'applied', regardless of what they might be given as.
-		 *  @returns {array} Data for the matched elements. If any elements, as a result of the
+		 *  @returns {array} Data for the matched elements. If any elements, as a gameResult of the
 		 *    selector, were not TR, TD or TH elements in the DataTable, they will have a null
 		 *    entry in the array.
 		 *  @dtopt API
@@ -2782,7 +2782,7 @@
 				else
 				{
 					// If array notation is used, we just want to strip it and use the property name
-					// and assign the value. If it isn't used, then we get the result we want anyway
+					// and assign the value. If it isn't used, then we get the gameResult we want anyway
 					data[ aLast.replace(__reArray, '') ] = val;
 				}
 			};
@@ -6716,7 +6716,7 @@
 	 *       {
 	 *         name:      'data'                -- string   - Property name
 	 *         val:       function () {},       -- function - Api method (or undefined if just an object
-	 *         methodExt: [ ... ],              -- array    - Array of Api object definitions to extend the method result
+	 *         methodExt: [ ... ],              -- array    - Array of Api object definitions to extend the method gameResult
 	 *         propExt:   [ ... ]               -- array    - Array of Api object definitions to extend the property
 	 *       },
 	 *       {
@@ -7217,7 +7217,7 @@
 	//       {
 	//         name:      'data'                -- string   - Property name
 	//         val:       function () {},       -- function - Api method (or undefined if just an object
-	//         methodExt: [ ... ],              -- array    - Array of Api object definitions to extend the method result
+	//         methodExt: [ ... ],              -- array    - Array of Api object definitions to extend the method gameResult
 	//         propExt:   [ ... ]               -- array    - Array of Api object definitions to extend the property
 	//       },
 	//       {
@@ -7301,7 +7301,7 @@
 			}
 			else if ( ret instanceof _Api ) {
 				// New API instance returned, want the value from the first item
-				// in the returned array for the singular result.
+				// in the returned array for the singular gameResult.
 				return ret.length ?
 					$.isArray( ret[0] ) ?
 						new _Api( ret.context, ret[0] ) : // Array results are 'enhanced'
@@ -9710,7 +9710,7 @@
 		/**
 		 * Partner property to mData which is used (only when defined) to get
 		 * the data - i.e. it is basically the same as mData, but without the
-		 * 'set' option, and also the data fed to it is the result from mData.
+		 * 'set' option, and also the data fed to it is the gameResult from mData.
 		 * This is the rendering method to match the data method of mData.
 		 *  @type function|int|string|null
 		 *  @default null
@@ -10443,7 +10443,7 @@
 		 * However, this can look odd when filtering data down to a small data set,
 		 * and the footer is left "floating" further down. This parameter (when
 		 * enabled) will cause DataTables to collapse the table's viewport down when
-		 * the result set will fit within the given Y height.
+		 * the gameResult set will fit within the given Y height.
 		 *  @type boolean
 		 *  @default false
 		 *
@@ -10974,7 +10974,7 @@
 	
 		/**
 		 * Callback that is called when the state has been loaded from the state saving method
-		 * and the DataTables settings object has been modified as a result of the loaded state.
+		 * and the DataTables settings object has been modified as a gameResult of the loaded state.
 		 *  @type function
 		 *  @param {object} settings DataTables settings object
 		 *  @param {object} data The state object that was loaded
@@ -13600,7 +13600,7 @@
 		"_iDisplayStart": 0,
 	
 		/**
-		 * Server-side processing - number of records in the result set
+		 * Server-side processing - number of records in the gameResult set
 		 * (i.e. before filtering), Use fnRecordsTotal rather than
 		 * this property to get the value of the number of records, regardless of
 		 * the server-side processing setting.
@@ -13911,7 +13911,7 @@
 		 *
 		 * And the following return is expected:
 		 *
-		 * * {boolean} Include the row in the searched result set (true) or not
+		 * * {boolean} Include the row in the searched gameResult set (true) or not
 		 *   (false)
 		 *
 		 * Note that as with the main search ability in DataTables, technically this

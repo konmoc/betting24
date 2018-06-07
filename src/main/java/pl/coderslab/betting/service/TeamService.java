@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pl.coderslab.betting.entity.Team;
 import pl.coderslab.betting.repository.TeamRepository;
 
+import java.util.List;
+
 @Service
 public class TeamService {
 
@@ -21,6 +23,10 @@ public class TeamService {
 
     public void deleteTeamWithId(Long id){
         teamRepository.deleteTeamById(id);
+    }
+
+    public List<Team> findAllTeams(){
+        return teamRepository.findAll();
     }
 
 

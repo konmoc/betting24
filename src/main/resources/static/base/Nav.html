@@ -10,36 +10,30 @@
 
                 <!--Games:-->
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Games">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#gameComponents" data-parent="#exampleAccordion">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" th:href="@{#gameComponents}" data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-gamepad"></i>
                         <span class="nav-link-text">Current games</span>
                     </a>
                     <ul class="sidenav-second-level collapse" id="gameComponents">
                         <li>
-                            <a th:href="@{/teams}">Team</a>
+                            <a th:href="@{/teamGames}">Team</a>
                         </li>
                         <li>
-                            <a th:href="@{/players}">1 vs.1</a>
+                            <a th:href="@{/singleGames}">1 vs.1</a>
                         </li>
                     </ul>
                 </li>
 
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                    <a class="nav-link" href="index.html">
-                        <i class="fa fa-fw fa-dashboard"></i>
-                        <span class="nav-link-text">Dashboard</span>
+                <li sec:authorize="isAuthenticated()"  class="nav-item" data-toggle="tooltip" data-placement="right" title="Account">
+                    <a class="nav-link" th:href="@{/userAccount}">
+                        <i class="fa fa-fw fa-cogs"></i>
+                        <span class="nav-link-text">Your Account</span>
                     </a>
                 </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                    <a class="nav-link" href="charts.html">
-                        <i class="fa fa-fw fa-area-chart"></i>
-                        <span class="nav-link-text">Charts</span>
-                    </a>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                    <a class="nav-link" href="tables.html">
-                        <i class="fa fa-fw fa-table"></i>
-                        <span class="nav-link-text">Tables</span>
+                <li sec:authorize="isAuthenticated()" class="nav-item" data-toggle="tooltip" data-placement="right" title="Mailbox">
+                    <a class="nav-link" th:href="@{/userMessages}">
+                        <i class="fa fa-fw fa-envelope-o"></i>
+                        <span class="nav-link-text">Mailbox</span>
                     </a>
                 </li>
 
@@ -57,65 +51,6 @@
                             <a th:href="@{/players}">Players</a>
                         </li>
                     </ul>
-                </li>
-
-
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
-                        <i class="fa fa-fw fa-file"></i>
-                        <span class="nav-link-text">Example Pages</span>
-                    </a>
-                    <ul class="sidenav-second-level collapse" id="collapseExamplePages">
-                        <li>
-                            <a href="login.html">Login Page</a>
-                        </li>
-                        <li>
-                            <a href="register.html">Registration Page</a>
-                        </li>
-                        <li>
-                            <a href="forgot-password.html">Forgot Password Page</a>
-                        </li>
-                        <li>
-                            <a href="blank.html">Blank Page</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
-                        <i class="fa fa-fw fa-sitemap"></i>
-                        <span class="nav-link-text">Menu Levels</span>
-                    </a>
-                    <ul class="sidenav-second-level collapse" id="collapseMulti">
-                        <li>
-                            <a href="#">Second Level Item</a>
-                        </li>
-                        <li>
-                            <a href="#">Second Level Item</a>
-                        </li>
-                        <li>
-                            <a href="#">Second Level Item</a>
-                        </li>
-                        <li>
-                            <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Third Level</a>
-                            <ul class="sidenav-third-level collapse" id="collapseMulti2">
-                                <li>
-                                    <a href="#">Third Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Third Level Item</a>
-                                </li>
-                                <li>
-                                    <a href="#">Third Level Item</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-                    <a class="nav-link" href="#">
-                        <i class="fa fa-fw fa-link"></i>
-                        <span class="nav-link-text">Link</span>
-                    </a>
                 </li>
             </ul>
             <ul class="navbar-nav sidenav-toggler">

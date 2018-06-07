@@ -4,6 +4,11 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+/**
+ * This entity represents game genre. It is described by:
+ * -name(String name) like "FPS-First Person Shooter" etc..
+ */
+
 @Entity
 @Table(name = "genres")
 @Data

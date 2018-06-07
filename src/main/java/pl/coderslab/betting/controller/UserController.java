@@ -34,7 +34,6 @@ public class UserController {
         Role role = new Role();
         role.setName("ROLE_USER");
         Set<Role> roles = new HashSet<>();
-        roles.add(role);
 
         User user = new User();
         user.setFirstName(faker.name().firstName());
@@ -61,7 +60,7 @@ public class UserController {
             System.out.println(result.toString());
             return "UserAddForm";
         }
-        user.setMoney(10.0);
+        user.setMoney(0.0);
         userService.saveUser(user);
         return "Success";
     }

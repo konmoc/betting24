@@ -4,6 +4,15 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+/**
+ * This entity describes video games. Each video game is described by:
+ * -name(String name)
+ * -one genre(Genre genre) like FPS,Strategy,RTS, etc..
+ * -round duration in minutes(int roundDuration)
+ * -number of rounds(Long numberOfRounds)
+ * -maximal amount of players in ONE team(Long maxAmountOfPlayersInTeam)
+ */
+
 @Entity
 @Table(name = "video_games")
 @Data

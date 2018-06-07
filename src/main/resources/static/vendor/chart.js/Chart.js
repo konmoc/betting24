@@ -10419,7 +10419,7 @@ module.exports = {
 	 * Evaluates the given `inputs` sequentially and returns the first defined value.
 	 * @param {Array[]} inputs - An array of values, falling back to the last value.
 	 * @param {Object} [context] - If defined and the current value is a function, the value
-	 * is called with `context` as first argument and the result becomes the new input.
+	 * is called with `context` as first argument and the gameResult becomes the new input.
 	 * @param {Number} [index] - If defined and the current value is an array, the value
 	 * at `index` become the new input.
 	 * @since 2.7.0

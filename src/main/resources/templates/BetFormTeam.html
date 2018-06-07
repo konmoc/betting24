@@ -1,0 +1,30 @@
+<!--header-->
+<span th:replace="../static/base/DocHeader.html :: docheader" xmlns:th="http://www.w3.org/1999/xhtml"></span>
+<!--nawigacja-->
+<div th:replace="../static/base/Nav.html :: nav" xmlns:th="http://www.w3.org/1999/xhtml"></div>
+<!--beginning-->
+<span th:replace="../static/base/Beggining.html :: beggining" xmlns:th="http://www.w3.org/1999/xhtml"></span>
+
+
+
+<!--CONTENT-->
+
+
+<h1 style="text-align: center" th:text="${bet.game.playersInGame.get(0).nickname + ' vs. ' + bet.game.playersInGame.get(1).nickname}">1</h1>
+
+<form action="#" th:action="@{/teambet}" th:object="${bet}" method="post">
+    <input type="hidden" th:field="*{game.id}" />
+    <input type="hidden" th:field="*{teamWhoWeBetFor.id}" />
+    <input type="hidden" th:field="*{user.id}" />
+    <!--<p th:class="addUserFormError" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">-->
+    <p style="text-align: center">How high should your bet be?<br> <input type="number" th:field="*{money}" /></p>
+    <p style="text-align: center"><button type="submit" value="Submit" class="btn btn-info" >Bet</button></p>
+</form>
+
+<!--CONTENT-->
+
+
+
+
+<span th:replace="../static/base/Footer.html :: footer" xmlns:th="http://www.w3.org/1999/xhtml"></span>
+</html>

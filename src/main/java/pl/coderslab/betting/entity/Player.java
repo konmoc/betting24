@@ -31,9 +31,10 @@ public class Player {
     private String lastName;
     private double winRatio;
 
-
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(mappedBy = "playerList")
     private List<Team> playerTeams;
+
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(mappedBy = "playersInGame")
     private List<Game> playerGames;

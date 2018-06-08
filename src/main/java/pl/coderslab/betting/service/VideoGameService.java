@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import pl.coderslab.betting.entity.VideoGame;
 import pl.coderslab.betting.repository.VideoGameRepository;
 
+import java.util.List;
+
 @Service
 public class VideoGameService {
 
@@ -24,4 +26,5 @@ public class VideoGameService {
         videoGameRepository.deleteVideoGameById(id);
     }
 
+    public List<VideoGame> findAllVideoGame(){return videoGameRepository.findAll();}
 }

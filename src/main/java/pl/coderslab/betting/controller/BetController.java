@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.betting.entity.Bet;
 import pl.coderslab.betting.entity.Game;
+import pl.coderslab.betting.entity.User;
 import pl.coderslab.betting.service.*;
 
 @Controller
@@ -43,6 +44,16 @@ public class BetController {
     }
     @PostMapping("/1v1bet")
     public String makeBet(@ModelAttribute Bet bet){
+        double moneySpentOnBet = bet.getMoney();
+        User userWhoBets = userService.findUserById(bet.getUser().getId());
+        double userMoney = userWhoBets.getMoney();
+        if(userMoney<moneySpentOnBet) {
+            return "redirect:/NoMoney";
+        }
+
+        double userNewMoney = userMoney-moneySpentOnBet;
+        userWhoBets.setMoney(userNewMoney);
+        userService.saveUserWithoutEncoding(userWhoBets);
         betService.saveBet(bet);
         return "Home";
     }
@@ -64,6 +75,15 @@ public class BetController {
     }
     @PostMapping("/teambet")
     public String makeTeamBet(@ModelAttribute Bet bet){
+        double moneySpentOnBet = bet.getMoney();
+        User userWhoBets = userService.findUserById(bet.getUser().getId());
+        double userMoney = userWhoBets.getMoney();
+        if(userMoney<moneySpentOnBet){
+            return "redirect:/NoMoney";
+        }
+        double userNewMoney = userMoney-moneySpentOnBet;
+        userWhoBets.setMoney(userNewMoney);
+        userService.saveUserWithoutEncoding(userWhoBets);
         betService.saveBet(bet);
         return "Home";
     }
@@ -71,6 +91,11 @@ public class BetController {
     @GetMapping("/CantBet")
     public String returnCantBet(){
         return "CantBet";
+    }
+
+    @GetMapping("/NoMoney")
+    public String returnNoMoney(){
+        return "NoMoney";
     }
 
 }

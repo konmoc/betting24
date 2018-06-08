@@ -6,8 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.betting.entity.*;
 import pl.coderslab.betting.repository.PlayerRepository;
 import pl.coderslab.betting.repository.TeamRepository;
@@ -57,5 +56,19 @@ public class HomeController {
         List<Message> receivedMessages = user.getMessagesReceived();
         model.addAttribute("messages", receivedMessages);
         return "Mailbox";
+    }
+
+    @GetMapping("/addCredits")
+    public String addCredits(Model model){
+        User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("user", user);
+        return "AddCredits";
+    }
+    @PostMapping("/addCredits")
+    public String addCredits(@RequestParam double money){
+        User user = userService.findByUserName(SecurityContextHolder.getContext().getAuthentication().getName());;
+        user.setMoney(user.getMoney()+money);
+        userService.saveUserWithoutEncoding(user);
+        return "redirect:/";
     }
 }

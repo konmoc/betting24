@@ -10,17 +10,14 @@
 
 
 
-                <!--CONTENT-->
-<h1>Welcome to Betting 25h!</h1>
-<h3 sec:authorize="!isAuthenticated()" >
-    Right now you have only access to info about Current Game, Teams, Players. <br>
-    You want to place a bet? Just log in or create new account
-</h3>
-<h3 sec:authorize="isAuthenticated()" >
-    Hello again! Back for more thrilling experience?
-</h3>
+<!--CONTENT-->
 
-                <!--CONTENT-->
+<form th:action="@{/addCredits}"  method="post">
+    <p>How much credits do you want to add: <input type="number" name="money" /></p>
+    <p><button type="submit" value="Submit" class="btn btn-info" >ADD CREDITS</button></p>
+</form>
+
+<!--CONTENT-->
 
 
 

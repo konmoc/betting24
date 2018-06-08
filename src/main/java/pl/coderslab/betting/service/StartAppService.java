@@ -28,6 +28,11 @@ public class StartAppService {
 
     Random random = new Random();
 
+    /**
+     * This method creates application starting data like Players, Video Games Genres, Video Games, etc.
+     * It is only started while application is started for the first time.
+     */
+
     public void startApp() {
 
         if(playerService.countAllPlayers() == 0){

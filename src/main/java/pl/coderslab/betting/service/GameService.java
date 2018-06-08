@@ -50,6 +50,9 @@ public class GameService {
         gameRepository.deleteGameById(id);
     }
 
+    /**
+     * This method creates 1v1 Game every 30 second
+     */
 
     @Scheduled(fixedDelay = 1000)
     public void create1v1Games(){
@@ -91,6 +94,10 @@ public class GameService {
         System.out.println("1v1 GAME CREATED AND SAVED TO DATABASE");
 
     }
+
+    /**
+     * This method creates Team Game every 30 second
+     */
     @Scheduled(fixedDelay = 30000)
     public void createTeamGames(){
         try {
@@ -141,6 +148,8 @@ public class GameService {
         return gameRepository.findGamesByTeamsInGameIsNotNull();
     }
 
+    public List<Game> findGamesByStatus(String status){return gameRepository.findGamesByStatus(status);}
+
     List<Game> findGamesByPlayersInGameContaining(Player player){
          return gameRepository.findGamesByPlayersInGameContaining(player);
     }
@@ -166,43 +175,19 @@ public class GameService {
         return gamesContainingPlayer;
     }
 
-//    @Scheduled(fixedDelay = 40000)
-//    public void setGameStatusesSetWinnerAndPayMoney1v1(){
-//        List<Game> allGames = this.findAll1v1Games();
-//            for (Game game: allGames) {
-//
-//                LocalDateTime gameStarts = game.getDateAndTime();
-//                LocalDateTime gameEnds = gameStarts.plusMinutes(game.getVideoGame().getRoundDuration()*game.getVideoGame().getNumberOfRounds());
-//                if(gameStarts.isBefore(LocalDateTime.now())){
-//                    if(gameEnds.isAfter(LocalDateTime.now())){
-//                        game.setStatus("STARTED");
-//                        this.saveGame(game);
-//                    }else if(game.getGameResult()==null){
-//                        game.setStatus("FINISHED");
-//                        //we choose winer randomly:
-//                        GameResult result = new GameResult();
-//                        List<Player> players = game.getPlayersInGame();
-//                        Player playerWhoWon = players.get(random.nextInt(1));
-//
-//                        result.setPlayerWhoWon(playerWhoWon);
-//                        result.setStatus("WON by " + playerWhoWon.getNickname() );
-//                        gameResultService.saveGameResult(result);
-//                        game.setGameResult(result);
-//                        this.saveGame(game);
-//                        //we pay users money for their bets:
-//                        betService.payMoneyForBetsInGame(game);
-//                    }
-//                    this.saveGame(game);
-//                }
-//
-//
-//            }
-//        System.out.println("GAME STATUSES FIXED AND MONEY FOR BETS PAYED");
-//
-//
-//        }
 
-    @Scheduled(fixedDelay = 8000)
+
+    /**
+     * This is the main method in the whole application which runs every 10 seconds;
+     * It goes through all games and sets statuse of each one.
+     * There are 3 statuses:
+     * PLANNED - when game have not yet started
+     * STARTED - when game have started but it is still running
+     * FINISHED - when game was finished
+     * When game status is set to FINISHED:
+     * -All bets are solved - we pay money for the winners and send messages to all of the users.
+     */
+    @Scheduled(fixedDelay = 10000)
     public void setGameStatusesSetWinnerAndPayMoney(){
         List<Game> allGames = this.findAllGames();
         for (Game game: allGames) {
@@ -219,11 +204,12 @@ public class GameService {
                     if(game.getTeamsInGame().size()>0){
                         //we choose winner randomly:
                         List<Team> teams = game.getTeamsInGame();
-                        Team teamWhichWon = teams.get(random.nextInt(1));
+                        Team teamWhichWon = teams.get(random.nextInt(2));
 
                         result.setTeamWhichWon(teamWhichWon);
                         result.setStatus("WON by " + teamWhichWon.getName());
                         gameResultService.saveGameResult(result);
+                        game.setGameResult(result);
                         this.saveGame(game);
 
                     }else{

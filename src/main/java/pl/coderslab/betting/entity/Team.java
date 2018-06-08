@@ -1,6 +1,8 @@
 package pl.coderslab.betting.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,13 +27,14 @@ public class Team {
     private VideoGame videoGame;
     private double winRatio;
 
-
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = {CascadeType.MERGE})
     private List<Player> playerList;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(mappedBy = "teamsInGame")
-
     private List<Game> gameList;
+
     @OneToMany(mappedBy = "teamWhichWon")
     private List<GameResult> gamesWon;
 

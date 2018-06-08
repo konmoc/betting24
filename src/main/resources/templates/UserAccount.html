@@ -84,7 +84,7 @@
     <tr th:each="bet : ${teamBets}" >
         <td th:text="${bet.id}"></td>
         <td th:text="${bet.game.teamsInGame.get(0).name}  + ' vs. ' + ${bet.game.teamsInGame.get(1).name} + '(GAME ID = '+${bet.game.id} + ')' "></td>
-        <td th:text="${bet.teamWhoWeBetFor.nickname}"></td>
+        <td th:text="${bet.teamWhichWeBetFor.name}"></td>
         <td th:text="${bet.money} + '$'"></td>
     </tr>
     </tbody>

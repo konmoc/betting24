@@ -16,7 +16,6 @@
     <input type="hidden" th:field="*{game.id}" />
     <input type="hidden" th:field="*{playerWhoWeBetFor.id}" />
     <input type="hidden" th:field="*{user.id}" />
-        <!--<p th:class="addUserFormError" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">-->
     <p style="text-align: center">How high should your bet be?<br> <input type="number" th:field="*{money}" /></p>
     <p style="text-align: center"><button type="submit" value="Submit" class="btn btn-info" >Bet</button></p>
 </form>

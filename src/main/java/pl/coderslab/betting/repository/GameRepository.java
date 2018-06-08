@@ -18,4 +18,5 @@ public interface GameRepository extends JpaRepository<Game, Long> {
     List<Game> findGamesByTeamsInGameIsNotNull();
     List<Game> findAll();
     List<Game> findGamesByPlayersInGameContaining(Player player);
+    List<Game> findGamesByStatus(String status);
 }

@@ -21,6 +21,12 @@ public class SpringDataUserDetailsService implements UserDetailsService {
         this.userService = userService;
     }
 
+    /**
+     *This method is used in Spring Security
+     * @param username
+     * @return
+     */
+
     @Override
     public UserDetails loadUserByUsername(String username) {
         User user = userService.findByUserName(username);

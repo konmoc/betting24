@@ -10,11 +10,11 @@
 <!--CONTENT-->
 
 
-<h1 style="text-align: center" th:text="${bet.game.playersInGame.get(0).nickname + ' vs. ' + bet.game.playersInGame.get(1).nickname}">1</h1>
+<h1 style="text-align: center" th:text="${bet.game.teamsInGame.get(0).name + ' vs. ' + bet.game.teamsInGame.get(1).name}">1</h1>
 
 <form action="#" th:action="@{/teambet}" th:object="${bet}" method="post">
     <input type="hidden" th:field="*{game.id}" />
-    <input type="hidden" th:field="*{teamWhoWeBetFor.id}" />
+    <input type="hidden" th:field="*{teamWhichWeBetFor.id}" />
     <input type="hidden" th:field="*{user.id}" />
     <!--<p th:class="addUserFormError" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">-->
     <p style="text-align: center">How high should your bet be?<br> <input type="number" th:field="*{money}" /></p>

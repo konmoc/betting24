@@ -29,7 +29,11 @@ public class UserService {
         this.roleRepository = roleRepository;
     }
 
-
+    /**
+     * this method puts new user into database and encodes his password - it is only used when user
+     * is savet to DB for the first time - we do not want out password encoded twice
+     * @param user
+     */
 
     public void saveUser(User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));

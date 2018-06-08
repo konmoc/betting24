@@ -39,6 +39,9 @@ public class PlayerService {
         return playerRepository.count();
     }
 
+    public List<Player> findAllPlayers(){
+        return playerRepository.findAll();
+    }
 
 
 
